@@ -34,6 +34,24 @@ void ins_testata(t_riga_scontrino* &head, t_riga_scontrino *nuovo){
 }
 
 
+
+void ins_coda(t_riga_scontrino* &head, t_riga_scontrino* nuovo)
+{
+
+    t_riga_scontrino *cerca_fine_lista = head;
+
+    if (head == nullptr){
+            ins_testata(head,nuovo);
+    }else{
+        while(cerca_fine_lista->next != nullptr){
+            cerca_fine_lista = cerca_fine_lista->next;
+        }
+            cerca_fine_lista->next = nuovo;
+            nuovo->next=nullptr;
+    }
+
+}
+
 void stampa_righe_scontrino(t_riga_scontrino *head){
     t_riga_scontrino *copia = head;
 
@@ -53,7 +71,8 @@ int main()
 
     for (int i=0;i<10;i++){
         t_riga_scontrino *nuovo = new t_riga_scontrino{i,i*10,100.0*i};
-        ins_testata(scontrino->head,nuovo);
+        //ins_testata2(scontrino->head,nuovo);  //crea una lista LIFO
+        ins_coda(scontrino->head,nuovo);    //crea una lista FIFO
     }
     stampa_righe_scontrino(scontrino->head);
 
